@@ -1,0 +1,89 @@
+﻿<Window x:Class="Login.frmUsuarios"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Login"
+        mc:Ignorable="d"
+        Title="Usuarios" Height="600" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="323*"/>
+            <ColumnDefinition Width="469*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Height="80" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2281D1"/>
+                    <GradientStop Color="#FF34268A" Offset="1"/>
+                    <GradientStop Color="#FF33288B" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Label 
+            Content="Registro de usuarios"
+            Foreground="White"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="10,10,0,0"
+            FontSize="40" Grid.ColumnSpan="2"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Stretch" Height="auto" Width="auto" Margin="0,85,10,419" Grid.Column="1">
+            <ToolBarTray Height="auto" VerticalAlignment="Stretch" Background="{x:Null}">
+                <ToolBar>
+                    <Button Name="btnNuevo" ToolTip="Nuevo registro" Click="btnNuevo_Click">
+                        <Image Source="Assets/newuser.png" Width="35"/>
+                    </Button>
+                    <Button Name="btnEditar" ToolTip="Editar registro" Click="btnEditar_Click">
+                        <Image Source="Assets/editar.png" Width="35"/>
+                    </Button>
+                    <Button Name="btnEliminar" ToolTip="Eliminar registro" Click="btnEliminar_Click">
+                        <Image Source="Assets/cancelar.png" Width="35"/>
+                    </Button>
+                    <Button Name="btnGuardar" ToolTip="Guardar registro" Click="btnGuardar_Click">
+                        <Image Source="Assets/guardar.png" Width="35"/>
+                    </Button>
+                    <Button Name="btnCancelar" ToolTip="Cancelar proceso" Click="btnCancelar_Click">
+                        <Image Source="Assets/reset.png" Width="35"/>
+                    </Button>
+                    <Button Name="btnImprimir" ToolTip="Imprimir registro" Click="btnImprimir_Click">
+                        <Image Source="Assets/imprimir.png" Width="35"/>
+                    </Button>
+                </ToolBar>
+            </ToolBarTray>
+        </StackPanel>
+        <GroupBox Header="Datos generales" Margin="10,150,10,10" Padding="20" Grid.ColumnSpan="2">
+            <StackPanel>
+                <TextBox 
+                    x:Name="txtNombreCompleto"
+                    materialDesign:HintAssist.Hint="Nombre completo"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <TextBox 
+                    x:Name="txtCorreo"
+                    Margin="0,10"
+                    materialDesign:HintAssist.Hint="Correo electronico"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox 
+                    x:Name="txtClave"
+                    Margin="0,10"
+                    materialDesign:HintAssist.Hint="Contraseña"
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                <PasswordBox 
+                    x:Name="txtConfirmacion"
+                    Margin="0,10"
+                    materialDesign:HintAssist.Hint="Confirmar contraseña"
+                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                <StackPanel Orientation="Vertical" Margin="0,20">
+                    <DataGrid x:Name="dgUsuarios" ItemsSource="{Binding}" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="dgUsuarios_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Codigo" Binding="{Binding UsuarioId }" />
+                            <DataGridTextColumn Header="Nombre completo" Binding="{Binding NombreCompleto}"/>
+                            <DataGridTextColumn Header="Correo" Binding="{Binding Correo}"/>
+                            <DataGridTextColumn Header="Clave" Binding="{Binding Clave}" Visibility="Hidden"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>
